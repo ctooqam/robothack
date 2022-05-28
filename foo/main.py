@@ -37,5 +37,5 @@ DRIVE_SPEED = 100
 # percentage point of light deviating from the threshold, we set the turn
 # rate of the drivebase to 1.2 degrees per second.
 
-follow_line_until(detect_black_line_callback)
+follow_line_until(line_sensor, other_sensor, robot, detect_black_line_callback)
 print("Done!")
