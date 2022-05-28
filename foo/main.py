@@ -1,5 +1,4 @@
 #!/usr/bin/env pybricks-micropython
-
 """
 Example LEGO® MINDSTORMS® EV3 Robot Educator Color Sensor Down Program
 ----------------------------------------------------------------------
@@ -15,6 +14,8 @@ from pybricks.ev3devices import Motor, ColorSensor
 from pybricks.parameters import Port
 from pybricks.tools import wait
 from pybricks.robotics import DriveBase
+
+from utils import passed_white_black_white
 
 ev3 = EV3Brick()
 
@@ -45,9 +46,26 @@ DRIVE_SPEED = 100
 PROPORTIONAL_GAIN = 1.2
 
 # Start following the line endlessly.
+
+# Vi sparar de K senaste mätvärdena för att detektera när vi passerat ett vitt-svart-vitt område.
+# Beroede på robotens hastighet så kommer vi ha X mätvärden som tas över det mörka området. 
+# x ska motsvara ca 30-40% av K för att passed_white_black_white ska bli nöjd.
+dark_line_width = 25  # mm
+nbr_dark_samples = 100 * dark_line_width / DRIVE_SPEED
+K = int(nbr_dark_samples / 0.35)
+
+measurements = []
+
 while True:
+
+    measurements.append(line_sensor.reflection())
+
+    if len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:])
+        ev3.speaker.beep()
+        print("Detected white-black-white")
+
     # Calculate the deviation from the threshold.
-    deviation = line_sensor.reflection() - threshold
+    #deviation = line_sensor.reflection() - threshold
     # print(line_sensor.reflection())
     # ev3.screen.print(line_sensor.reflection())
     # Calculate the turn rate.
@@ -58,3 +76,6 @@ while True:
 
     # You can wait for a short time or do other things in this loop.
     wait(10)
+
+    if len(measurments) > 10000:
+        meaurements = measurements[5000:]
