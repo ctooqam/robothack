@@ -107,7 +107,9 @@ def rotate_ccw_until(sensor, robot, callback, *, speed, DRIVE_SPEED=100):
     """"speed is degrees per second."""
     measurements = []
 
-    while True:
+    iter = 0
+    while iter < 200:
+        iter += 1
         measurements.append(sensor.reflection())
         if len(measurements) > 10000:
             measurements = measurements[5000:]
@@ -118,5 +120,4 @@ def rotate_ccw_until(sensor, robot, callback, *, speed, DRIVE_SPEED=100):
 
         robot.drive(0, speed)
     print(measurements)
-
 
