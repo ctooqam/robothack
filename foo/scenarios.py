@@ -5,12 +5,12 @@ def scenarioA1(ev3, left_motor, right_motor, front_motor, line_sensor, other_sen
     follow_line_until(line_sensor, other_sensor, robot, detect_black_line_callback)
     follow_line_until(line_sensor, other_sensor, robot, detect_black_line_callback)
     robot.straight(-100)
-    front_motor.run_target(100, -80)
+    front_motor.run_target(100, -70)
     robot.straight(150)
     front_motor.run_target(100, 0)
     follow_line_until(line_sensor, other_sensor, robot, detect_black_line_callback)
     robot.straight(100)
-    front_motor.run_target(100, -80)
+    front_motor.run_target(100, -70)
     robot.straight(-200)
     front_motor.run_target(100, 0)
     robot.straight(200)
@@ -30,14 +30,20 @@ def scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sen
 
 
 def scenarioA3(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor):
-    follow_line_until(other_sensor, line_sensor, robot, lambda x: stop_at_obstacle(x, obstacle_sensor, 155), side_factor=-1, PROPORTIONAL_GAIN=0.9)
+    follow_line_until(other_sensor, line_sensor, robot, lambda x: stop_at_time(x, 200), side_factor=-1, PROPORTIONAL_GAIN=0.9)
+    follow_line_until(other_sensor, line_sensor, robot, lambda x: stop_at_obstacle(x, obstacle_sensor, 170), side_factor=-1, PROPORTIONAL_GAIN=0.9)
     robot.turn(-15)
-    front_motor.run_target(100, 80)
+    front_motor.run_target(100, 90)
     robot.turn(45)
     front_motor.run_target(100, 0)
-    robot.turn(-65)
-    robot.straight(-150)
-    robot.turn(195)
+    robot.turn(-80)
+    robot.straight(-100)
+    for _ in range(4):
+        front_motor.run_target(100, 90)
+        robot.turn(60)
+        front_motor.run_target(100, 0)
+        robot.turn(-60)
+    robot.turn(205)
     move_straight_until(other_sensor, robot, sharp_white_black_edge)
 
 

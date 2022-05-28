@@ -36,8 +36,12 @@ def sharp_white_black_edge(measurements, reversed=False):
 
 
 def stop_at_obstacle(measurements, obstacle_sensor, threshold=100):
-  distance = obstacle_sensor.distance()
-  return distance < threshold
+    distance = obstacle_sensor.distance()
+    return distance < threshold
+
+
+def stop_at_time(measurements, threshold=200):
+    return len(measurements) > threshold
 
 
 def detect_black_line_callback(measurements):
@@ -52,7 +56,7 @@ def detect_black_line_callback(measurements):
     return len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:])
 
 
-def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED=100, PROPORTIONAL_GAIN=1.1, side_factor= 1):
+def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED=100, PROPORTIONAL_GAIN=1.1, side_factor=1):
     """
     Callback takes measurements from the second sensor. Returns True when we are finnished.
 
@@ -118,4 +122,3 @@ def rotate_ccw_until(sensor, robot, callback, *, speed):
 
         robot.drive(0, speed)
     print(measurements)
-
