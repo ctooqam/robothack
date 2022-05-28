@@ -22,6 +22,7 @@ ev3 = EV3Brick()
 # Initialize the motors.
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.B)
+front_motor = Motor(Port.C)
 
 # Initialize the color sensor.
 line_sensor = ColorSensor(Port.S4)
@@ -45,42 +46,42 @@ DRIVE_SPEED = 100
 # For example, if the light value deviates from the threshold by 10, the robot
 # steers at 10*1.2 = 12 degrees per second.
 PROPORTIONAL_GAIN = 1.2
-measurements = []
-search = 'white'
+
 # Start following the line endlessly.
 
 # Vi sparar de K senaste mätvärdena för att detektera när vi passerat ett vitt-svart-vitt område.
-# Beroede på robotens hastighet så kommer vi ha X mätvärden som tas över det mörka området. 
+# Beroede på robotens hastighet så kommer vi ha X mätvärden som tas över det mörka området.
 # x ska motsvara ca 30-40% av K för att passed_white_black_white ska bli nöjd.
 dark_line_width = 25  # mm
 nbr_dark_samples = 100 * dark_line_width / DRIVE_SPEED
 K = int(nbr_dark_samples / 0.35)
 
 measurements = []
-
+print(front_motor.angle())
+front_motor.run_time(90, 1000)
 while True:
 
-    measurements.append(other_sensor.reflection())
+    #     measurements.append(other_sensor.reflection())
 
-    if len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:]):
-        ev3.speaker.beep()
-        print("Detected white-black-white")
+    #     if len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:]):
+    #         ev3.speaker.beep()
+    #         print("Detected white-black-white")
 
-    # Calculate the deviation from the threshold.
-    deviation = line_sensor.reflection() - threshold
-    measurements.append(other_sensor.reflection())
-    # ev3.screen.print(other_sensor.reflection())
-    #deviation = line_sensor.reflection() - threshold
-    # print(line_sensor.reflection())
-    # ev3.screen.print(line_sensor.reflection())
-    # Calculate the turn rate.
-    turn_rate = PROPORTIONAL_GAIN * deviation
+    #     # Calculate the deviation from the threshold.
+    #     deviation = line_sensor.reflection() - threshold
+    #     measurements.append(other_sensor.reflection())
+    #     # ev3.screen.print(other_sensor.reflection())
+    #     #deviation = line_sensor.reflection() - threshold
+    #     # print(line_sensor.reflection())
+    #     # ev3.screen.print(line_sensor.reflection())
+    #     # Calculate the turn rate.
+    #     turn_rate = PROPORTIONAL_GAIN * deviation
 
-    # Set the drive base speed and turn rate.
-    robot.drive(DRIVE_SPEED, turn_rate)
+    #     # Set the drive base speed and turn rate.
+    #     robot.drive(DRIVE_SPEED, turn_rate)
 
-    # You can wait for a short time or do other things in this loop.
+    #     # You can wait for a short time or do other things in this loop.
     wait(10)
 
-    if len(measurements) > 10000:
-        measurements = measurements[5000:]
+#     if len(measurements) > 10000:
+#         measurements = measurements[5000:]
