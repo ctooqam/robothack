@@ -18,6 +18,18 @@ def passed_white_black_white(measurements):
     dark = mean(measurements[start_dark:end_dark])
     return bright_1 > 2 * dark and bright_2 > 2 * dark
 
+
+def sharp_white_black_edge(measurements):
+    K = 13
+    selected_measurements = measurements[len(measurements)-K:]
+    n = len(selected_measurements)
+    end_first = int(n * 0.4)
+    start_last = int(n * 0.6)
+    bright = mean(measurements[:end_first])
+    dark = mean(measurements[start_last:])
+    return bright > 2 * dark
+
+
 def stop_at_obstacle(measurements, obstacle_sensor):
   distance = obstacle_sensor.distance()
   print(distance)
