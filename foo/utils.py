@@ -36,7 +36,6 @@ def sharp_white_black_edge(measurements, reversed=False):
 
 def stop_at_obstacle(measurements, obstacle_sensor, threshold=100):
   distance = obstacle_sensor.distance()
-  print(distance)
   return distance < threshold
 
 
@@ -74,7 +73,6 @@ def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED
             measurements = measurements[5000:]
 
         if callback(measurements):
-            print(measurements)
             break
 
         deviation = line_sensor.reflection() - threshold
@@ -96,7 +94,6 @@ def move_straight_until(sensor, robot, callback, *, DRIVE_SPEED=100):
             measurements = measurements[5000:]
 
         if callback(measurements):
-            print(measurements)
             break
 
         robot.drive(DRIVE_SPEED, 0)
