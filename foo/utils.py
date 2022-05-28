@@ -19,7 +19,7 @@ def passed_white_black_white(measurements):
     return bright_1 > 2 * dark and bright_2 > 2 * dark
 
 
-def sharp_white_black_edge(measurements):
+def sharp_white_black_edge(measurements, reversed=False):
     K = 30
     if len(measurements) < K:
         return False
@@ -29,6 +29,8 @@ def sharp_white_black_edge(measurements):
     start_last = int(n * 0.6)
     bright = mean(selected_measurements[:end_first])
     dark = mean(selected_measurements[start_last:])
+    if reversed:
+        return dark > 2 * bright
     return bright > 2 * dark
 
 
@@ -99,4 +101,22 @@ def move_straight_until(sensor, robot, callback, *, DRIVE_SPEED=100):
 
         robot.drive(DRIVE_SPEED, 0)
     print(measurements)
+
+
+def rotate_ccw_until(sensor, robot, callback, *, speed, DRIVE_SPEED=100):
+    """"speed is degrees per second."""
+    measurements = []
+
+    while True:
+        measurements.append(sensor.reflection())
+        if len(measurements) > 10000:
+            measurements = measurements[5000:]
+
+        if callback(measurements):
+            print(measurements)
+            break
+
+        robot.drive(0, speed)
+    print(measurements)
+
 

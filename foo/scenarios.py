@@ -24,3 +24,4 @@ def scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sen
   robot.straight(-100)
   robot.turn(90)
   move_straight_until(other_sensor, robot, sharp_white_black_edge)
+  rotate_ccw_until(other_sensor, robot, lambda measurements: sharp_white_black_edge(measurements, reversed=True))
