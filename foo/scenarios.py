@@ -1,4 +1,4 @@
-from utils import detect_black_line_callback, follow_line_until
+from utils import detect_black_line_callback, follow_line_until, stop_at_obstacle
 
 def scenarioA(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor):
   follow_line_until(line_sensor, other_sensor, robot, detect_black_line_callback)
