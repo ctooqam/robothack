@@ -30,7 +30,7 @@ def sharp_white_black_edge(measurements):
     bright = mean(measurements[:end_first])
     dark = mean(measurements[start_last:])
     print(bright / (2 * dark))
-    return bright > 2 * dark
+    return (bright / 2 * dark) > 0.9
 
 
 def stop_at_obstacle(measurements, obstacle_sensor):
