@@ -14,7 +14,7 @@ from pybricks.ev3devices import Motor, ColorSensor, UltrasonicSensor
 from pybricks.parameters import Port
 from pybricks.tools import wait
 from pybricks.robotics import DriveBase
-from scenarios import scenarioA1, scenarioA2
+from scenarios import *
 from utils import detect_black_line_callback, follow_line_until, stop_at_obstacle
 
 ev3 = EV3Brick()
@@ -40,5 +40,6 @@ DRIVE_SPEED = 100
 # rate of the drivebase to 1.2 degrees per second.
 
 # scenarioA1(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
-scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
+# scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
+scenarioA3(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
 print("Done!")

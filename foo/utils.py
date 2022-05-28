@@ -34,10 +34,10 @@ def sharp_white_black_edge(measurements, reversed=False):
     return bright > 2 * dark
 
 
-def stop_at_obstacle(measurements, obstacle_sensor):
+def stop_at_obstacle(measurements, obstacle_sensor, threshold=100):
   distance = obstacle_sensor.distance()
   print(distance)
-  return distance < 100
+  return distance < threshold
 
 
 def detect_black_line_callback(measurements):
@@ -52,7 +52,7 @@ def detect_black_line_callback(measurements):
     return len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:])
 
 
-def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED=100, PROPORTIONAL_GAIN=1.2):
+def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED=100, PROPORTIONAL_GAIN=1.2, side_factor= 1):
     """
     Callback takes measurements from the second sensor. Returns True when we are finnished.
 
@@ -78,7 +78,7 @@ def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED
             break
 
         deviation = line_sensor.reflection() - threshold
-        turn_rate = PROPORTIONAL_GAIN * deviation
+        turn_rate = PROPORTIONAL_GAIN * deviation * side_factor
 
         # Set the drive base speed and turn rate.
         robot.drive(DRIVE_SPEED, turn_rate)
