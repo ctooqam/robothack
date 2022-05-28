@@ -21,6 +21,8 @@ def passed_white_black_white(measurements):
 
 def sharp_white_black_edge(measurements):
     K = 13
+    if len(measurements) < K:
+        return False
     selected_measurements = measurements[len(measurements)-K:]
     n = len(selected_measurements)
     end_first = int(n * 0.4)
