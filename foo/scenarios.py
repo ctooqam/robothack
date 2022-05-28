@@ -19,7 +19,7 @@ def scenarioA1(ev3, left_motor, right_motor, front_motor, line_sensor, other_sen
   robot.straight(100)
 
 
-def scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot):
+def scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor):
   # Move to train
   robot.straight(-200)
   robot.turn(90)
