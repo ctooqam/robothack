@@ -20,17 +20,16 @@ def passed_white_black_white(measurements):
 
 
 def sharp_white_black_edge(measurements):
-    K = 16
+    K = 30
     if len(measurements) < K:
         return False
     selected_measurements = measurements[len(measurements)-K:]
     n = len(selected_measurements)
     end_first = int(n * 0.4)
     start_last = int(n * 0.6)
-    bright = mean(measurements[:end_first])
-    dark = mean(measurements[start_last:])
-    print(bright / (2 * dark))
-    return (bright / (2 * dark)) > 0.9
+    bright = mean(selected_measurements[:end_first])
+    dark = mean(selected_measurements[start_last:])
+    return bright > 2 * dark
 
 
 def stop_at_obstacle(measurements, obstacle_sensor):
