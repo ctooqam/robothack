@@ -62,7 +62,7 @@ while True:
 
     measurements.append(other_sensor.reflection())
 
-    if len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:])
+    if len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:]):
         ev3.speaker.beep()
         print("Detected white-black-white")
 
@@ -82,5 +82,5 @@ while True:
     # You can wait for a short time or do other things in this loop.
     wait(10)
 
-    if len(measurments) > 10000:
-        meaurements = measurements[5000:]
+    if len(measurements) > 10000:
+        measurements = measurements[5000:]
