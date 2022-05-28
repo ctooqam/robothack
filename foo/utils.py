@@ -100,7 +100,7 @@ def move_straight_until(sensor, robot, callback, *, DRIVE_SPEED=100):
     print(measurements)
 
 
-def rotate_ccw_until(sensor, robot, callback, *, speed, DRIVE_SPEED=100):
+def rotate_ccw_until(sensor, robot, callback, *, speed):
     """"speed is degrees per second."""
     measurements = []
 

@@ -42,4 +42,4 @@ def scenarioA3(ev3, left_motor, right_motor, front_motor, line_sensor, other_sen
 
 def scenarioA4(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor):
   print("Scenario A4")
-  rotate_ccw_until(other_sensor, robot, lambda measurements: sharp_white_black_edge(measurements, reversed=True), speed=20)
+  rotate_ccw_until(line_sensor, robot, lambda measurements: sharp_white_black_edge(measurements, reversed=True), speed=20)
