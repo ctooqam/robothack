@@ -30,7 +30,8 @@ def sharp_white_black_edge(measurements, reversed=False):
     bright = mean(selected_measurements[:end_first])
     dark = mean(selected_measurements[start_last:])
     if reversed:
-        return dark > 2 * bright
+        print(dark / (2 * bright))
+        return dark / (2 * bright)
     return bright > 2 * dark
 
 
