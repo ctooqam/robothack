@@ -39,8 +39,8 @@ DRIVE_SPEED = 100
 # percentage point of light deviating from the threshold, we set the turn
 # rate of the drivebase to 1.2 degrees per second.
 
-# scenarioA1(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
-#scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
-#scenarioA3(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
+scenarioA1(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
+scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
+scenarioA3(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
 scenarioA4(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor)
 print("Done!")

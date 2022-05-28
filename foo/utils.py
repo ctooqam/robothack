@@ -52,7 +52,7 @@ def detect_black_line_callback(measurements):
     return len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:])
 
 
-def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED=100, PROPORTIONAL_GAIN=1.2, side_factor= 1):
+def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED=100, PROPORTIONAL_GAIN=1.1, side_factor= 1):
     """
     Callback takes measurements from the second sensor. Returns True when we are finnished.
 
