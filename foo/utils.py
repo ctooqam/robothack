@@ -101,4 +101,5 @@ def move_straight_until(sensor, robot, callback, *, DRIVE_SPEED=100):
             break
 
         robot.drive(DRIVE_SPEED, 0)
+    print(measurements)
 
