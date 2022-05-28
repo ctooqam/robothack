@@ -30,8 +30,8 @@ def sharp_white_black_edge(measurements, reversed=False):
     bright = mean(selected_measurements[:end_first])
     dark = mean(selected_measurements[start_last:])
     if reversed:
-        return dark > 2.5 * bright
-    return bright > 2.5 * dark
+        return dark > 2 * bright
+    return bright > 2 * dark
 
 
 def stop_at_obstacle(measurements, obstacle_sensor, threshold=100):
@@ -107,7 +107,9 @@ def rotate_ccw_until(sensor, robot, callback, *, speed, DRIVE_SPEED=100):
     """"speed is degrees per second."""
     measurements = []
 
-    while True:
+    iter = 0
+    while iter < 200:
+        iter += 1
         measurements.append(sensor.reflection())
         if len(measurements) > 10000:
             measurements = measurements[5000:]
@@ -118,5 +120,4 @@ def rotate_ccw_until(sensor, robot, callback, *, speed, DRIVE_SPEED=100):
 
         robot.drive(0, speed)
     print(measurements)
-
 
