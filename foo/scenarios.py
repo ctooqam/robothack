@@ -24,7 +24,7 @@ def scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sen
     robot.straight(-100)
     robot.turn(90)
     move_straight_until(other_sensor, robot, sharp_white_black_edge)
-
+    rotate_ccw_until(other_sensor, robot, lambda measurements: sharp_white_black_edge(measurements, reversed=True))
 
 def scenarioA3(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor):
-    follow_line_until(other_sensor, line_sensor, robot, lambda x: stop_at_obstacle(x, obstacle_sensor, 200), side_factor=-1)
+    follow_line_until(other_sensor, line_sensor, robot, lambda x: stop_at_obstacle(x, obstacle_sensor, 200), side_factor=-1)   
