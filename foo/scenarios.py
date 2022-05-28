@@ -1,4 +1,4 @@
-from utils import detect_black_line_callback, follow_line_until, stop_at_obstacle, sharp_white_black_edge
+from utils import *
 
 
 def scenarioA1(ev3, left_motor, right_motor, front_motor, line_sensor, other_sensor, robot, obstacle_sensor):
@@ -23,4 +23,4 @@ def scenarioA2(ev3, left_motor, right_motor, front_motor, line_sensor, other_sen
   # Move to train
   robot.straight(-200)
   robot.turn(90)
-  follow_line_until(line_sensor, other_sensor, robot, sharp_white_black_edge)
+  move_straight_until(line_sensor, other_sensor, robot, sharp_white_black_edge)
