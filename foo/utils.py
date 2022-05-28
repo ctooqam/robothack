@@ -85,11 +85,11 @@ def follow_line_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED
         wait(10)
 
 
-def move_straight_until(line_sensor, other_sensor, robot, callback, *, DRIVE_SPEED=100):
+def move_straight_until(sensor, robot, callback, *, DRIVE_SPEED=100):
     measurements = []
 
     while True:
-        measurements.append(other_sensor.reflection())
+        measurements.append(sensor.reflection())
         if len(measurements) > 10000:
             measurements = measurements[5000:]
 
