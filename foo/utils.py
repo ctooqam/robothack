@@ -20,7 +20,7 @@ def passed_white_black_white(measurements):
 
 
 def sharp_white_black_edge(measurements):
-    K = 13
+    K = 16
     if len(measurements) < K:
         return False
     selected_measurements = measurements[len(measurements)-K:]
