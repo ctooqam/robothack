@@ -19,7 +19,7 @@ def passed_white_black_white(measurements):
     return bright_1 > 2 * dark and bright_2 > 2 * dark
 
 
-def sharp_white_black_edge(measurements, reversed=False):
+def sharp_white_black_edge(measurements, reversed=False, thr=2.5):
     K = 30
     if len(measurements) < K:
         return False
@@ -30,9 +30,8 @@ def sharp_white_black_edge(measurements, reversed=False):
     bright = mean(selected_measurements[:end_first])
     dark = mean(selected_measurements[start_last:])
     if reversed:
-        print(dark / (2 * bright))
-        return dark > (2 * bright)
-    return bright > 2 * dark
+        return dark > (thr * bright)
+    return bright > thr * dark
 
 
 def stop_at_obstacle(measurements, obstacle_sensor, threshold=100):
