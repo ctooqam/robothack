@@ -23,7 +23,8 @@ left_motor = Motor(Port.A)
 right_motor = Motor(Port.B)
 
 # Initialize the color sensor.
-line_sensor = ColorSensor(Port.S1)
+line_sensor = ColorSensor(Port.S4)
+other_sensor = ColorSensor(Port.S1)
 
 # Initialize the drive base.
 robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
@@ -43,13 +44,24 @@ DRIVE_SPEED = 100
 # For example, if the light value deviates from the threshold by 10, the robot
 # steers at 10*1.2 = 12 degrees per second.
 PROPORTIONAL_GAIN = 1.2
-
+measurements = []
+search = 'white'
 # Start following the line endlessly.
 while True:
     # Calculate the deviation from the threshold.
     deviation = line_sensor.reflection() - threshold
-    # print(line_sensor.reflection())
-    # ev3.screen.print(line_sensor.reflection())
+    measurements.append(other_sensor.reflection())
+    print(measurements[-1])
+    if len(measurements) > 3:
+        if(sum(measurements[-3:]) > 180 and search == 'white'):
+            search = 'black'
+            DRIVE_SPEED = 50 if DRIVE_SPEED == 100 else 100
+            print('White')
+        if(sum(measurements[-3:]) < 50 and search == 'black'):
+            print('Black')
+            search = 'white'
+
+    # ev3.screen.print(other_sensor.reflection())
     # Calculate the turn rate.
     turn_rate = PROPORTIONAL_GAIN * deviation
 
@@ -57,4 +69,4 @@ while True:
     robot.drive(DRIVE_SPEED, turn_rate)
 
     # You can wait for a short time or do other things in this loop.
-    wait(10)
+    wait(5)
