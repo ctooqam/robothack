@@ -24,7 +24,8 @@ def detect_black_line_callback(measurements):
     # Beroede på robotens hastighet så kommer vi ha X mätvärden som tas över det mörka området.
     # x ska motsvara ca 30-40% av K för att passed_white_black_white ska bli nöjd.
     dark_line_width = 25
-    nbr_dark_samples = 100 * dark_line_width / DRIVE_SPEED
+    samples_per_second = 50
+    nbr_dark_samples = samples_per_second * dark_line_width / DRIVE_SPEED
     K = int(nbr_dark_samples / 0.35)
 
     return len(measurements) > K and passed_white_black_white(measurements[len(measurements)-K:])
