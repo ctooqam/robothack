@@ -18,6 +18,11 @@ def passed_white_black_white(measurements):
     dark = mean(measurements[start_dark:end_dark])
     return bright_1 > 2 * dark and bright_2 > 2 * dark
 
+def stop_at_obstacle(measurements, obstacle_sensor):
+  distance = obstacle_sensor.distance()
+  print(distance)
+  return distance < 100
+
 
 def detect_black_line_callback(measurements):
     # Vi sparar de K senaste mätvärdena för att detektera när vi passerat ett vitt-svart-vitt område.
